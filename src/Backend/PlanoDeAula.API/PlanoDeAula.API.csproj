@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\Shared\PlanoDeAula.Communication\PlanoDeAula.Communication.csproj" />
     <ProjectReference Include="..\..\Shared\PlanoDeAula.Exceptions\PlanoDeAula.Exceptions.csproj" />
     <ProjectReference Include="..\PlanoDeAula.Application\PlanoDeAula.Application.csproj" />
