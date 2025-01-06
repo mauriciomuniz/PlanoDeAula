@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PlanoDeAula.Application.UseCases.User.Register;
 using PlanoDeAula.Communication.Requests;
 using PlanoDeAula.Communication.Responses;
 
@@ -14,7 +15,9 @@ namespace PlanoDeAula.API.Controllers
         [ProducesResponseType(typeof(ResponseRegisteredUserJson), StatusCodes.Status201Created)]
         public IActionResult Register(RequestRegisterUserJson request)
         {
-            return Created();
+            var useCase = new RegisterUserUseCase();
+            var result  =  useCase.Execute(request);
+            return Created(string.Empty,result);
         }
     }
 }
