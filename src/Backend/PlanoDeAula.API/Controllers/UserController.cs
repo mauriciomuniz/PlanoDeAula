@@ -16,8 +16,8 @@ namespace PlanoDeAula.API.Controllers
         public IActionResult Register(RequestRegisterUserJson request)
         {
             var useCase = new RegisterUserUseCase();
-            var result  =  useCase.Execute(request);
-            return Created(string.Empty,result);
+            var result = useCase.Execute(request);
+            return Created(string.Empty, result);
         }
     }
 }

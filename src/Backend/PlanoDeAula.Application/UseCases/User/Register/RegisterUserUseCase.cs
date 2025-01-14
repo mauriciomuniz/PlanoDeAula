@@ -1,5 +1,6 @@
 ﻿using PlanoDeAula.Communication.Requests;
 using PlanoDeAula.Communication.Responses;
+using PlanoDeAula.Exceptions.ExceptionsBase;
 
 namespace PlanoDeAula.Application.UseCases.User.Register
 {
@@ -22,9 +23,9 @@ namespace PlanoDeAula.Application.UseCases.User.Register
 
             if (result.IsValid == false)
             {
-                var errorMessages = result.Errors.Select(e => e.ErrorMessage);
+                var errorMessages = result.Errors.Select(e => e.ErrorMessage).ToList();
 
-                throw new Exception();
+                throw new ErrorOnValidationException(errorMessages);
             }
 
         }
