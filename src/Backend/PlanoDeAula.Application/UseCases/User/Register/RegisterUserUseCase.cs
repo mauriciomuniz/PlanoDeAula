@@ -2,13 +2,16 @@
 using PlanoDeAula.Application.Services.Cryptography;
 using PlanoDeAula.Communication.Requests;
 using PlanoDeAula.Communication.Responses;
+using PlanoDeAula.Domain.Repositories.User;
 using PlanoDeAula.Exceptions.ExceptionsBase;
 
 namespace PlanoDeAula.Application.UseCases.User.Register
 {
     public class RegisterUserUseCase
-    {
-        public ResponseRegisteredUserJson Execute(RequestRegisterUserJson request)
+    {   
+        private readonly IUserReadOnlyRepository _readOnlyRepository;
+        private readonly IUserWriteOnlyRepository _writeOnlyRepository;
+        public async Task<ResponseRegisteredUserJson> Execute(RequestRegisterUserJson request)
         {
             var cryptoPassword = new PasswordEncrypter();
 
@@ -19,9 +22,9 @@ namespace PlanoDeAula.Application.UseCases.User.Register
 
             Validate(request);
             var user = autoMapper.Map<Domain.Entities.User>(request);   
-
             user.Password = cryptoPassword.Encrypt(request.Password);
 
+            await _writeOnlyRepository.Add(user);
 
             return new ResponseRegisteredUserJson
             { 
